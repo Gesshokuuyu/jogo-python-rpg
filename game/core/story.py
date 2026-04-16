@@ -1,28 +1,73 @@
-# game/story.py
+# game/core/story.py
 
-from game.entities.enemy import Enemy
-from game.core.combat import iniciar_combate
+from game.core.ui import (
+    titulo, narrar, menu, escolha, aviso, separador,
+    COR_MENU, COR_AVISO
+)
+from game.locations.tavern import taverna
+from game.locations.forest import floresta
+from game.locations.cave import caverna
+from game.locations.tower import torre
+
 
 def inicio(player):
-    print("\nVocê chega à vila de Lyris...")
+    """Loop principal de história — hub da vila de Lyris"""
+    narrar("Você chega à vila de Lyris, uma pequena comunidade cercada por florestas sombrias.")
+    narrar("Os moradores sussurram sobre uma torre escura no horizonte...")
+    narrar("Dizem que Morvak, o Senhor das Sombras, ameaça destruir tudo.")
+    narrar("Cabe a você, aventureiro, enfrentar essa ameaça.\n")
 
-    escolha = input("1 - Ir para floresta | 2 - Taverna\n> ")
+    while player.esta_vivo():
+        titulo("VILA DE LYRIS")
 
-    if escolha == "1":
-        floresta(player)
-    else:
-        taverna(player)
+        opcoes = ["Taverna (descansar, mercador, inventário)"]
 
-def floresta(player):
-    print("\nVocê entra na floresta...")
-    print("\n Você sente uma presença sombria, olha para o lado e...")
-    inimigo = Enemy("Criatura Sombria", 30, 5, 2)
+        # Floresta sempre disponível
+        opcoes.append("Floresta de Lyris")
 
-    comabt = iniciar_combate(player, inimigo)
+        # Caverna desbloqueada após cap 2
+        if player.capitulo >= 2:
+            opcoes.append("Caverna das Sombras")
+        else:
+            opcoes.append(COR_AVISO + "Caverna das Sombras [BLOQUEADA]")
 
-    if(comabt):
-        print(f"\n A Batalha foi dificil, mas você venceu, deseja lootear a {inimigo.nome}?")
-        print("\n 1 - Sim | 2 - Não\n> ")
+        # Torre desbloqueada após cap 3
+        if player.capitulo >= 3:
+            opcoes.append("Torre de Morvak (Boss Final)")
+        else:
+            opcoes.append(COR_AVISO + "Torre de Morvak [BLOQUEADA]")
 
-def taverna(player):
-    print("\nUm velho fala sobre a Torre de Morvak...")
+        opcoes.append("Sair do jogo")
+
+        menu(opcoes)
+
+        total = len(opcoes)
+        validas = [str(i) for i in range(1, total + 1)]
+        op = escolha(validas=validas)
+
+        if op == "1":
+            taverna(player)
+
+        elif op == "2":
+            floresta(player)
+
+        elif op == "3":
+            if player.capitulo >= 2:
+                caverna(player)
+            else:
+                aviso("Você precisa provar seu valor na Floresta primeiro!")
+
+        elif op == "4":
+            if player.capitulo >= 3:
+                resultado = torre(player)
+                if resultado:
+                    break
+            else:
+                aviso("Você precisa derrotar o Golem na Caverna primeiro!")
+
+        elif op == "5":
+            narrar("Até a próxima, aventureiro!")
+            break
+
+        if not player.esta_vivo():
+            break
