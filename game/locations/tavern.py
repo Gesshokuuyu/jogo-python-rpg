@@ -2,7 +2,7 @@
 
 from game.core.ui import (
     titulo, dialogo, narrar, menu, escolha, info_cura,
-    aviso, sucesso, separador, mostrar_status
+    aviso, sucesso, separador, mostrar_status, limparUI
 )
 from game.core.inventory import menu_inventario
 from game.core.merchant import abrir_loja
@@ -10,6 +10,7 @@ from game.core.merchant import abrir_loja
 
 def taverna(player):
     """Hub principal — Taverna de Lyris"""
+    limparUI()
     titulo("TAVERNA DE LYRIS")
     narrar("Você empurra a pesada porta de madeira e entra na taverna.")
     narrar("O calor da lareira e o cheiro de cerveja preenchem o ar.")
@@ -45,11 +46,13 @@ def taverna(player):
             _conversar_sabio(player)
 
         elif op == "6":
+            limparUI()
             narrar("Você sai da taverna e sente a brisa fresca da noite.")
             break
 
 
 def _conversar_sabio(player):
+    limparUI()
     """O velho sábio dá dicas baseadas no capítulo atual"""
     if player.capitulo == 1:
         dialogo("Eldric, o Sábio",

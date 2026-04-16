@@ -1,6 +1,8 @@
 import sys
 import time
 from colorama import Fore, Style, init
+import subprocess
+import os
 
 init(autoreset=True)
 
@@ -29,6 +31,11 @@ COR_NORMAL = Style.RESET_ALL
 # FUNÇÕES DE UI
 # =========================
 
+
+def limparUI():
+    comando = 'cls' if os.name == 'nt' else 'clear'
+    subprocess.run(comando, shell=True)
+
 def separador(char="═", tamanho=50):
     print(Fore.LIGHTBLACK_EX + char * tamanho)
 
@@ -47,7 +54,7 @@ def dialogo(nome_npc, texto):
     print(COR_NPC + Style.BRIGHT + f"\n  [{nome_npc}]: " + COR_DIALOGO + f'"{texto}"')
 
 
-def narrar(texto, velocidade=0.02):
+def narrar(texto, velocidade=0.04):
     """Print lento, letra por letra"""
     print()
     for char in texto:
@@ -135,6 +142,8 @@ def barra_mana(nome, mana, mana_max):
 
 
 def mostrar_status(player):
+    limparUI()
+
     """Mostra status completo do jogador"""
     titulo(f"STATUS — {player.nome}")
     print(COR_MENU + f"  Classe: {COR_ITEM}{player.classe}")
@@ -160,6 +169,8 @@ def mostrar_status(player):
 
 
 def tela_vitoria():
+    limparUI()
+
     print()
     separador("★")
     print(COR_OURO + Style.BRIGHT + """
@@ -178,6 +189,8 @@ def tela_vitoria():
 
 
 def tela_derrota():
+    limparUI()
+
     print()
     separador("†")
     print(COR_ERRO + Style.BRIGHT + """
@@ -194,6 +207,8 @@ def tela_derrota():
 
 
 def tela_titulo():
+    limparUI()
+
     print(COR_BOSS + Style.BRIGHT + """
     ╔══════════════════════════════════════════════════╗
     ║                                                  ║

@@ -3,12 +3,14 @@
 from game.data.helpers.dataHelper import get_merchant, get_merchant_items
 from game.core.ui import (
     titulo, subtitulo, dialogo, menu, escolha, info_item, info_ouro,
-    aviso, erro, sucesso, separador, COR_ITEM, COR_MENU, COR_OURO, COR_NORMAL
+    aviso, erro, sucesso, separador, limparUI, COR_ITEM, COR_MENU, COR_OURO, COR_NORMAL
 )
 from game.core.inventory import _detalhes_item
 
 
 def abrir_loja(player, merchant_id):
+    limparUI()
+
     """Abre a loja de um mercador"""
     merchant = get_merchant(merchant_id)
     if not merchant:
@@ -34,6 +36,8 @@ def abrir_loja(player, merchant_id):
 
 
 def _comprar(player, merchant_id, nome_merchant):
+    limparUI()
+
     """Menu de compra"""
     itens = get_merchant_items(merchant_id)
     if not itens:
@@ -73,6 +77,8 @@ def _comprar(player, merchant_id, nome_merchant):
 
 
 def _vender(player, nome_merchant):
+    limparUI()
+
     """Menu de venda (50% do preço)"""
     if not player.inventario:
         aviso("Seu inventário está vazio.")

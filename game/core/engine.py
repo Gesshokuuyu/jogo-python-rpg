@@ -4,7 +4,7 @@ from colorama import init
 from game.entities.player import Player
 from game.core.classe import escolher_classe
 from game.core.story import inicio
-from game.core.ui import tela_titulo, narrar, separador, escolha, COR_MENU
+from game.core.ui import tela_titulo, narrar, separador, escolha, limparUI, COR_MENU
 from game.core.sound import tocar_musica
 
 
@@ -24,6 +24,8 @@ def iniciar_jogo():
     player = Player(nome)
 
     escolher_classe(player)
+    limparUI()
+
 
     narrar(f"\nBem-vindo, {player.nome} o {player.classe}! Sua aventura começa agora...")
 

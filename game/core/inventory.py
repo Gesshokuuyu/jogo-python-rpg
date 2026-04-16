@@ -1,7 +1,7 @@
 # game/core/inventory.py
 
 from game.core.ui import (
-    titulo, subtitulo, menu, escolha, info_item, aviso, erro,
+    titulo, subtitulo, menu, escolha, info_item, aviso, erro, limparUI, 
     sucesso, separador, COR_ITEM, COR_MENU, COR_OURO, COR_NORMAL
 )
 
@@ -47,6 +47,8 @@ def _detalhes_item(item):
 
 
 def menu_inventario(player):
+    limparUI()
+
     """Menu interativo do inventário"""
     while True:
         mostrar_inventario(player)
