@@ -1,7 +1,7 @@
 # game/core/story.py
 
 from game.core.ui import (
-    titulo, narrar, menu, escolha, aviso, separador,
+    titulo, narrar, menu, escolha, aviso, separador,limparUI,
     COR_MENU, COR_AVISO
 )
 from game.locations.tavern import taverna
@@ -44,6 +44,8 @@ def inicio(player):
         total = len(opcoes)
         validas = [str(i) for i in range(1, total + 1)]
         op = escolha(validas=validas)
+
+        limparUI()
 
         if op == "1":
             taverna(player)

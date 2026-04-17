@@ -4,7 +4,7 @@ import random
 from game.core.ui import (
     titulo, subtitulo, menu, escolha, separador,
     barra_hp, barra_mana, info_dano, info_cura, info_xp,
-    info_ouro, info_item, aviso, erro, sucesso,
+    info_ouro, info_item, aviso, erro, sucesso,limparUI,
     COR_BOSS, COR_DANO, COR_CURA, COR_MENU, COR_XP, COR_ITEM,
     tela_derrota
 )
@@ -36,6 +36,8 @@ def iniciar_combate(player, enemy):
 
         validas = [str(i) for i in range(1, len(opcoes) + 1)]
         acao = escolha(validas=validas)
+
+        limparUI()
 
         acao_idx = int(acao)
         jogador_agiu = False

@@ -2,7 +2,7 @@
 
 from game.data.helpers.dataHelper import get_merchant, get_merchant_items
 from game.core.ui import (
-    titulo, subtitulo, dialogo, menu, escolha, info_item, info_ouro,
+    titulo, subtitulo, dialogo, menu, escolha, info_item, info_ouro, limparUI, 
     aviso, erro, sucesso, separador, limparUI, COR_ITEM, COR_MENU, COR_OURO, COR_NORMAL
 )
 from game.core.inventory import _detalhes_item
@@ -25,6 +25,8 @@ def abrir_loja(player, merchant_id):
 
         menu(["Comprar", "Vender", "Sair da loja"])
         op = escolha(validas=["1", "2", "3"])
+
+        limparUI()
 
         if op == "1":
             _comprar(player, merchant_id, merchant["nome"])
@@ -55,6 +57,8 @@ def _comprar(player, merchant_id, nome_merchant):
 
     print(COR_MENU + f"  [0] Voltar")
     op = escolha()
+
+    limparUI()
 
     try:
         num = int(op)
@@ -93,6 +97,8 @@ def _vender(player, nome_merchant):
 
     print(COR_MENU + f"  [0] Voltar")
     op = escolha()
+
+    limparUI()
 
     try:
         num = int(op)

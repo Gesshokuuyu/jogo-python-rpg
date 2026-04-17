@@ -4,7 +4,7 @@ import random
 from game.entities.enemy import Enemy
 from game.core.combat import iniciar_combate
 from game.core.ui import (
-    titulo, narrar, menu, escolha, aviso, sucesso,
+    titulo, narrar, menu, escolha, aviso, sucesso,limparUI,
     subtitulo, separador, COR_MENU
 )
 
@@ -23,12 +23,15 @@ def floresta(player):
         print(COR_MENU + f"  Vitórias na floresta: {player.vitorias_floresta}/{VITORIAS_NECESSARIAS}")
 
         if player.vitorias_floresta >= VITORIAS_NECESSARIAS:
+            limparUI()
             sucesso("Você limpou a floresta! O caminho para a Caverna das Sombras está aberto!")
             player.capitulo = max(player.capitulo, 2)
             break
 
         menu(["Explorar (procurar inimigos)", "Voltar à vila"])
         op = escolha(validas=["1", "2"])
+
+        limparUI()
 
         if op == "1":
             _encontro(player)
@@ -44,7 +47,7 @@ def _encontro(player):
     enemy_id = random.choice(INIMIGOS_FLORESTA)
     enemy = Enemy(enemy_id)
 
-    narrar(f"Algo se move entre as árvores... É um {enemy.nome}!")
+    narrar(f"Algo se move entre as árvores... É um(a) {enemy.nome}!")
 
     resultado = iniciar_combate(player, enemy)
 
