@@ -6,7 +6,7 @@ from game.core.combat import iniciar_combate
 from game.core.ui import (
     titulo, narrar, menu, escolha, aviso, sucesso,
     subtitulo, separador, tela_vitoria,
-    COR_MENU, COR_BOSS, COR_DANO
+    COR_MENU, COR_BOSS, COR_DANO, limparUI
 )
 from colorama import Style
 
@@ -50,6 +50,9 @@ def torre(player):
     narrar("Você encontra uma sala tranquila com uma fonte de água cristalina.")
     menu(["Descansar na fonte (recuperar HP/Mana)", "Seguir em frente"])
     op = escolha(validas=["1", "2"])
+
+    limparUI()
+
     if op == "1":
         player.descansar()
         sucesso(f"HP e Mana restaurados! ({player.hp}/{player.hp_max} HP)")

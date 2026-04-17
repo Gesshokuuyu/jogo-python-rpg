@@ -22,6 +22,7 @@ def iniciar_jogo():
         nome = "Herói"
 
     player = Player(nome)
+    limparUI()
 
     escolher_classe(player)
     limparUI()

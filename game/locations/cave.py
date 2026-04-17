@@ -6,7 +6,7 @@ from game.core.combat import iniciar_combate
 from game.core.merchant import abrir_loja
 from game.core.ui import (
     titulo, narrar, menu, escolha, aviso, sucesso,
-    subtitulo, separador, COR_MENU, COR_BOSS
+    subtitulo, separador, COR_MENU, COR_BOSS, limparUI
 )
 from colorama import Style
 
@@ -29,6 +29,8 @@ def caverna(player):
             menu(["Enfrentar o Golem de Pedra (Mini-Boss)", "Voltar"])
             op = escolha(validas=["1", "2"])
 
+            limparUI()
+
             if op == "1":
                 if _boss_golem(player):
                     return
@@ -40,6 +42,8 @@ def caverna(player):
         else:
             menu(["Explorar (procurar inimigos)", "Mercador — Dúrin, o Anão", "Voltar à vila"])
             op = escolha(validas=["1", "2", "3"])
+
+            limparUI()
 
             if op == "1":
                 _encontro(player)

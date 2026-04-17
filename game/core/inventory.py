@@ -54,7 +54,10 @@ def menu_inventario(player):
         mostrar_inventario(player)
 
         menu(["Equipar item", "Usar item", "Descartar item", "Voltar"])
+        
         op = escolha(validas=["1", "2", "3", "4"])
+
+        limparUI()
 
         if op == "1":
             equipar_item_menu(player)
@@ -82,6 +85,8 @@ def equipar_item_menu(player):
 
     print(COR_MENU + f"  [0] Cancelar")
     op = escolha()
+
+    limparUI()
 
     try:
         num = int(op)
@@ -117,6 +122,8 @@ def usar_item_menu(player):
     print(COR_MENU + f"  [0] Cancelar")
     op = escolha()
 
+    limparUI()
+
     try:
         num = int(op)
         if num == 0:
@@ -147,6 +154,8 @@ def descartar_item_menu(player):
     print(COR_MENU + f"  [0] Cancelar")
     op = escolha()
 
+    limparUI()
+
     try:
         num = int(op)
         if num == 0:
@@ -176,6 +185,8 @@ def usar_item_combate(player):
 
     print(COR_MENU + f"  [0] Cancelar")
     op = escolha()
+
+    limparUI()
 
     try:
         num = int(op)

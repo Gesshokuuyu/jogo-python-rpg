@@ -28,6 +28,8 @@ def taverna(player):
         ])
         op = escolha(validas=["1", "2", "3", "4", "5", "6"])
 
+        limparUI()
+
         if op == "1":
             player.descansar()
             narrar("Você se senta perto da lareira e descansa...")
@@ -45,8 +47,7 @@ def taverna(player):
         elif op == "5":
             _conversar_sabio(player)
 
-        elif op == "6":
-            limparUI()
+        elif op == "6":            
             narrar("Você sai da taverna e sente a brisa fresca da noite.")
             break
 
