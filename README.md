@@ -184,7 +184,6 @@ jogo-python-rpg/
 | Biblioteca  | Uso                              |
 |-------------|----------------------------------|
 | `colorama`  | Coloração e estilo no terminal   |
-| `pygame`    | Música de fundo e efeitos sonoros|
 
 ---
 
