@@ -13,6 +13,8 @@ CLASSES_CONFIG = {
         "ataque": 12,
         "defesa": 8,
         "magia": 0,
+        "c_critico": 0.15,
+        "m_critico": 1.5,
         "destreza": 2,
         "arma_id": "ar-g-l1",
         "armadura_id": "ab-c-l1",
@@ -27,6 +29,8 @@ CLASSES_CONFIG = {
         "mana": 30,
         "ataque": 9,
         "defesa": 5,
+        "c_critico": 0.08,
+        "m_critico": 1.2,
         "magia": 0,
         "destreza": 8,
         "arma_id": "ar-a-l1",
@@ -42,6 +46,8 @@ CLASSES_CONFIG = {
         "mana": 60,
         "ataque": 5,
         "defesa": 3,
+        "c_critico": 0.18,
+        "m_critico": 1.1,
         "magia": 12,
         "destreza": 2,
         "arma_id": "ar-m-l1",
@@ -61,7 +67,7 @@ def escolher_classe(player):
         arma = get_item_by_id(cfg["arma_id"])
         print(COR_MENU + f"  [{key}] " + COR_XP + f"{cfg['nome']}")
         print(COR_MENU + f"      {cfg['descricao']}")
-        print(COR_MENU + f"      HP: {cfg['hp']} | Mana: {cfg['mana']} | ATK: {cfg['ataque']} | DEF: {cfg['defesa']}")
+        print(COR_MENU + f"      HP: {cfg['hp']} | Mana: {cfg['mana']} | ATK: {cfg['ataque']} | DEF: {cfg['defesa']} | Crit%: {cfg["c_critico"]} | Crit*: {cfg["m_critico"]}")
         if arma:
             print(COR_ITEM + f"      Arma inicial: {arma['nome']}")
         print()
@@ -76,6 +82,8 @@ def escolher_classe(player):
     player.mana_max = cfg["mana"]
     player.ataque = cfg["ataque"]
     player.defesa = cfg["defesa"]
+    player.critPerc = cfg["c_critico"]
+    player.critMult = cfg["m_critico"]
     player.magia = cfg["magia"]
     player.destreza = cfg["destreza"]
     player.habilidade_nome = cfg["habilidade_nome"]

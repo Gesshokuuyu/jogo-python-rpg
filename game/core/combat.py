@@ -46,10 +46,8 @@ def iniciar_combate(player, enemy):
         if acao_idx == 1:
             # Atacar
             jogador_agiu = True
-            dano = _calcular_dano(player.get_ataque_total(), enemy.defesa)
-            critico = random.random() < 0.15
+            dano, critico = _calcular_dano(player.get_ataque_total(), enemy.defesa)
             if critico:
-                dano = int(dano * 1.5)
                 info_dano(f"CRÍTICO! Você causou {dano} de dano em {enemy.nome}!")
             else:
                 info_dano(f"Você causou {dano} de dano em {enemy.nome}!")
@@ -90,10 +88,15 @@ def iniciar_combate(player, enemy):
 
         # --- TURNO DO INIMIGO ---
         if jogador_agiu and enemy.esta_vivo():
-            dano_inimigo = _calcular_dano(enemy.ataque, player.get_defesa_total())
+            dano_inimigo, critico = _calcular_dano(enemy.ataque, player.get_defesa_total(), player.critPerc, player.critMult)
             dano_inimigo = max(1, dano_inimigo)
             player.hp -= dano_inimigo
-            info_dano(f"{enemy.nome} causou {dano_inimigo} de dano em você!")
+            if(critico):
+                aviso("Critíco")
+                info_dano(f"{enemy.nome} causou {dano_inimigo} de dano em você!")
+            else:
+                info_dano(f"{enemy.nome} causou {dano_inimigo} de dano em você!")
+
 
         turno += 1
 
@@ -131,8 +134,15 @@ def iniciar_combate(player, enemy):
         return False
 
 
-def _calcular_dano(ataque, defesa):
+def _calcular_dano(ataque, defesa, critPercentage, critMult):
     """Calcula dano com variação aleatória e redução de defesa"""
     dano_base = max(1, ataque - defesa // 2)
-    variacao = random.randint(-2, 3)
-    return max(1, dano_base + variacao)
+    variacao  = random.randint(-2, 3)
+    dano_base += variacao
+    critDamage = False
+
+    if(random.random() < critPercentage and critMult >= 1):
+        dano_base *= critMult
+        critDamage = True
+
+    return max(1, dano_base + variacao), critDamage

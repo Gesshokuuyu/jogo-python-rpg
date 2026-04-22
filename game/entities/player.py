@@ -7,6 +7,8 @@ class Player:
         self.classe = ""
         self.hp = 100
         self.hp_max = 100
+        self.critPerc = 0
+        self.critMult = 0
         self.mana = 0
         self.mana_max = 0
         self.ataque = 10
@@ -51,6 +53,8 @@ class Player:
         self.hp = self.hp_max
         self.ataque += bonus_atk
         self.defesa += bonus_def
+        self.critPerc *= 1.2
+        self.critMult *= 1.2
         if self.mana_max > 0:
             self.mana_max += random.randint(5, 15)
             self.mana = self.mana_max
